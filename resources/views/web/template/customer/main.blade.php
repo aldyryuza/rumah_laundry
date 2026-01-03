@@ -143,6 +143,9 @@
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
 
 
+    <script src="{{ asset('js/url.js') }}"></script>
+
+
 
 
     @yield('scripts-customer')
