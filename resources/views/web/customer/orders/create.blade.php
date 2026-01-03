@@ -1,10 +1,10 @@
-@extends('web.template.main')
-@php $title = 'Tambah Order'; @endphp
+@extends('web.template.customer.main')
+@php $title = 'Tambah Order Customer'; @endphp
 
-@section('content')
+@section('content-customer')
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="{{ route('orders.store') }}">
+        <form method="POST" action="{{ route('order-customer-store') }}">
             {{ csrf_field() }}
 
             {{-- <div class="form-group">
@@ -73,7 +73,7 @@
             </div>
 
             <button class="btn btn-primary">Simpan Order</button>
-            <a href="{{ route('orders.index') }}" class="btn btn-secondary">Kembali</a>
+            <a href="{{ route('order-customer') }}" class="btn btn-secondary">Kembali</a>
         </form>
     </div>
 </div>

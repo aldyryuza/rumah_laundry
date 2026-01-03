@@ -1,7 +1,7 @@
-@extends('web.template.main')
-@php $title = 'Detail Order'; @endphp
+@extends('web.template.customer.main')
+@php $title = 'Detail Order Customer'; @endphp
 
-@section('content')
+@section('content-customer')
 <div class="row">
 
     {{-- INFO ORDER --}}
@@ -136,38 +136,7 @@
 <hr>
 
 
-@if (Auth::user()->role == 'admin')
-<h5>Update Status Order</h5>
-<form action="{{ route('orders.updateStatus', $data->id) }}" method="POST">
-    {{ csrf_field() }}
-
-    <select name="status" class="form-control" required>
-        <option value="dalam_antrian" {{ $data->status == 'dalam_antrian' ? 'selected' : '' }}>
-            Dalam Antrian
-        </option>
-        <option value="dikerjakan" {{ $data->status == 'dikerjakan' ? 'selected' : '' }}>
-            Dikerjakan
-        </option>
-        <option value="selesai_dikerjakan" {{ $data->status == 'selesai_dikerjakan' ? 'selected' : '' }}>
-            Selesai Dikerjakan
-        </option>
-        <option value="menunggu_pembayaran" {{ $data->status == 'menunggu_pembayaran' ? 'selected' : '' }}>
-            Menunggu Pembayaran
-        </option>
-        <option value="selesai" {{ $data->status == 'selesai' ? 'selected' : '' }}>
-            Selesai
-        </option>
-    </select>
-
-    <button class="btn btn-success mt-2">
-        Update Status
-    </button>
-</form>
-<hr>
-
-{{-- ACTION BUTTONS --}}
-
-<a href="{{ route('orders.index') }}" class="btn btn-secondary">
+<a href="{{ route('order-customer') }}" class="btn btn-secondary">
     Kembali
 </a>
 
@@ -176,25 +145,9 @@
     Bayar
 </a>
 @endif
-
-
-@if (in_array($data->status, ['menunggu_pembayaran', 'selesai']) && !$data->invoice)
-<form action="{{ route('invoices.generate', $data->id) }}" method="POST" style="display:inline">
-    {{ csrf_field() }}
-    <button class="btn btn-primary">
-        Generate Invoice
-    </button>
-</form>
-@endif
-
 @if ($data->invoice)
 <a href="{{ route('invoices.show', $data->id) }}" class="btn btn-info">
     Lihat Invoice
-</a>
-@endif
-@else
-<a href="{{ route('orders.index') }}" class="btn btn-secondary">
-    Kembali
 </a>
 @endif
 @endsection

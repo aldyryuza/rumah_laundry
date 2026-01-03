@@ -53,5 +53,10 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', 'AuthController@login')->name('login.post');
 
     Route::get('/registrasi', 'RegistrasiController@index')->name('registrasi');
+    // ORDER CUSTOMER
+    Route::get('/order-customer', 'OrderCustomerController@index')->name('order-customer');
+    Route::get('/order-customer/create', 'OrderCustomerController@create')->name('order-customer-create');
+    Route::post('/order-customer/store', 'OrderCustomerController@store')->name('order-customer-store');
+    Route::get('/order-customer/show/{id}', 'OrderCustomerController@show')->name('order-customer-show');
 });
 Route::post('/logout', 'AuthController@logout')->name('logout');

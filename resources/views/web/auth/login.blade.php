@@ -48,7 +48,8 @@
                     <div class="row">
                         <div class="col-8">
                             <p class="mb-0">
-                                <a href="{{ route('registrasi') }}" class="text-center">Register a new membership</a>
+                                <a href="{{ route('order-customer') }}" class="btn btn-warning text-center">Create Order
+                                    Customer</a>
                             </p>
                         </div>
                         <!-- /.col -->

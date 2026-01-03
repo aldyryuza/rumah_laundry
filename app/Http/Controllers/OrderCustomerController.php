@@ -10,22 +10,19 @@ use App\LaundryPackage;
 use Carbon\Carbon;
 use DB;
 
-class OrderController extends Controller
+class OrderCustomerController extends Controller
 {
     public function index()
     {
         $data = Order::with(['user', 'laundryType', 'laundryPackage'])->get();
 
-        // jika user adalah pelanggan, tampilkan hanya order miliknya
-        if (auth()->user()->role == 'pelanggan') {
-            $data = $data->where('user_id', auth()->user()->id);
-        }
+
 
         $users = User::where('role', 'pelanggan')->get();
         $types = LaundryType::all();
         $packages = LaundryPackage::all();
 
-        return view('web.orders.index', compact(
+        return view('web.customer.orders.index', compact(
             'data',
             'users',
             'types',
@@ -40,7 +37,7 @@ class OrderController extends Controller
         $types     = LaundryType::all();
         $packages  = LaundryPackage::all();
 
-        return view('web.orders.create', compact(
+        return view('web.customer.orders.create', compact(
             'customers',
             'types',
             'packages'
@@ -63,6 +60,7 @@ class OrderController extends Controller
 
             // generate no order
             $noOrder = $this->generateOrderNumber($type->code);
+            // dd($request->all());
 
             Order::create([
                 'no_order'            => $noOrder,
@@ -82,7 +80,7 @@ class OrderController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('orders.index')
+            return redirect()->route('web.customer.orders.index')
                 ->with('success', 'Order berhasil dibuat');
         } catch (\Exception $e) {
             DB::rollback();
@@ -113,7 +111,7 @@ class OrderController extends Controller
             'invoice'
         ])->findOrFail($id);
 
-        return view('web.orders.show', compact('data'));
+        return view('web.customer.orders.show', compact('data'));
     }
 
     public function updateStatus(Request $request, $id)

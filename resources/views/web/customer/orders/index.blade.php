@@ -1,21 +1,8 @@
-@extends('web.template.main')
-@php $title = 'Order Laundry'; @endphp
+@extends('web.template.customer.main')
+@php $title = 'Order Laundry Customer'; @endphp
 
-@section('content')
+@section('content-customer')
 <div class="row mb-3">
-    {{-- <div class="col-md-3">
-        <select id="filter-user" class="form-control" {{ Auth::user()->role == 'pelanggan' ? 'disabled' : '' }}>
-            <option value="">-- Semua Pelanggan --</option>
-
-            @foreach ($users as $user)
-            <option value="{{ $user->name }}" {{ Auth::user()->role == 'pelanggan' && Auth::user()->id == $user->id ?
-                'selected' : '' }}>
-                {{ $user->name }}
-            </option>
-            @endforeach
-        </select>
-
-    </div> --}}
 
     <div class="col-md-2">
         <select id="filter-type" class="form-control">
@@ -54,7 +41,7 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Data Order Laundry</h3>
-        <a href="{{ route('orders.create') }}" class="btn btn-sm btn-primary float-right">Tambah Order</a>
+        <a href="{{ route('order-customer-create') }}" class="btn btn-sm btn-primary float-right">Tambah Order</a>
     </div>
 
     <div class="card-body">
@@ -80,7 +67,7 @@
                     <td>{{ ucfirst(str_replace('_', ' ', $item->status)) }}</td>
                     <td>Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
                     <td>
-                        <a href="{{ route('orders.show', $item->id) }}" class="btn btn-sm btn-info">Detail</a>
+                        <a href="{{ route('order-customer-show', $item->id) }}" class="btn btn-sm btn-info">Detail</a>
                     </td>
 
                 </tr>
@@ -91,7 +78,7 @@
 </div>
 @endsection
 
-@section('scripts')
+@section('scripts-customer')
 <script>
     $(function() {
             var table = $('#data-table').DataTable();

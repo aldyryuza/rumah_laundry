@@ -13,7 +13,6 @@ class InvoiceController extends Controller
     public function generate($orderId)
     {
         $order = Order::with('payments')->findOrFail($orderId);
-
         if ($order->payments->count() == 0) {
             return back()->with('error', 'Belum ada pembayaran');
         }
@@ -21,6 +20,7 @@ class InvoiceController extends Controller
         if ($order->invoice) {
             return redirect()->route('invoices.show', $orderId);
         }
+
 
         DB::beginTransaction();
         try {
@@ -40,6 +40,7 @@ class InvoiceController extends Controller
             return redirect()->route('invoices.show', $orderId);
         } catch (\Exception $e) {
             DB::rollback();
+            dd('GANCOK');
             return back()->withErrors($e->getMessage());
         }
     }
@@ -65,13 +66,14 @@ class InvoiceController extends Controller
 
     private function generateInvoiceNumber()
     {
-        $date = date('Ym');
+        $date = date('Ymd');
         $count = Invoice::where('created_at', '>=', date('Y-m-d') . ' 00:00:00')
             ->where('created_at', '<=', date('Y-m-d') . ' 23:59:59')
             ->count() + 1;
 
         // contoh: INV-202006-0001
 
+        // dd('INV-' . $date . '-' . str_pad($count, 4, '0', STR_PAD_LEFT));
         return 'INV-' . $date . '-' . str_pad($count, 4, '0', STR_PAD_LEFT);
     }
 }
