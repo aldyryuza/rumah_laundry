@@ -3,7 +3,7 @@
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'DashboardController@index');
-    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::get('/users', 'UserController@index')->name('users.index');
     Route::get('/users/show/{id}', 'UserController@show')->name('users.show');

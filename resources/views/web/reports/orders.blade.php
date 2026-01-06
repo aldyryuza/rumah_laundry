@@ -1,5 +1,5 @@
 @extends('web.template.main')
-@php $title = 'Order Report'; @endphp
+@php $title = 'Laporan Order'; @endphp
 
 @section('content')
 <form method="GET" class="mb-3">
@@ -44,7 +44,13 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Order Report</h3>
+        <h2 class="card-title">Laporan Order</h2>
+        <br>
+        {{-- Nama & alamat laundry --}}
+        <p>
+            <strong>BEEBERSIHJASA LAUNDRY</strong><br>
+            Jl. Prabu Kian Santang No.80, Kota Tangerang
+        </p>
     </div>
     <div class="card-body">
 
@@ -57,18 +63,33 @@
             <thead>
                 <tr>
                     <th>No Order</th>
+                    <th>No Invoice</th>
                     <th>Pelanggan</th>
-                    <th>Tanggal</th>
+                    <th>Nomor HP</th>
+                    <th>Alamat</th>
+                    <th>Tanggal Order</th>
+                    <th>Tipe Laundry</th>
+                    <th>Paket Laundry</th>
+                    <th>Estimasi Selesai</th>
                     <th>Status</th>
+                    <th>Metode Pembayaran</th>
                     <th>Subtotal</th>
                 </tr>
             </thead>
+
             <tbody>
                 @foreach ($orders as $o)
+
                 <tr>
                     <td>{{ $o->no_order }}</td>
+                    <td>{{ $o->invoice['invoice_number'] }}</td>
                     <td>{{ $o->nama_user }}</td>
+                    <td>{{ $o->no_hp }}</td>
+                    <td>{{ $o->alamat }}</td>
                     <td>{{ $o->date_in }}</td>
+                    <td>{{ $o->laundryType->name }}</td>
+                    <td>{{ $o->laundryPackage->name }}</td>
+                    <td>{{ $o->laundryPackage->duration_day }} Hari</td>
                     <td>
                         @if ($o->status == 'antrian')
                         <span class="badge badge-secondary">Dalam Antrian</span>
@@ -82,6 +103,12 @@
                         <span class="badge badge-success">Selesai</span>
                         @endif
                     </td>
+                    <td>
+                        @foreach ($o->payments as $item)
+                        {{ $item->method }} : Rp {{ number_format($item->amount, 0, ',', '.') }} <br>
+                        @endforeach
+                    </td>
+
 
                     <td>Rp {{ number_format($o->subtotal, 0, ',', '.') }}</td>
                 </tr>
@@ -95,26 +122,35 @@
 @section('scripts')
 <script>
     $(function() {
-            $('.table').DataTable({
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'excelHtml5',
-                        text: 'Download Excel',
-                        title: 'Report Laundry'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'Download PDF',
-                        title: 'Report Laundry',
-                        orientation: 'landscape',
-                        pageSize: 'A4'
-                    },
-                    {
-                        extend: 'print',
-                        text: 'Print'
-                    }
-                ]
-            });
-        });
+    $('.table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                text: 'Download Excel',
+                title: 'Laporan Order',
+                messageTop: 'BEEBERSIHJASA LAUNDRY\nJl. Prabu Kian Santang No.80, Kota Tangerang'
+            },
+            {
+                extend: 'pdfHtml5',
+                text: 'Download PDF',
+                title: 'Laporan Order',
+                messageTop: 'BEEBERSIHJASA LAUNDRY\nJl. Prabu Kian Santang No.80, Kota Tangerang',
+                orientation: 'landscape',
+                pageSize: 'A4'
+            },
+            {
+                extend: 'print',
+                text: 'Print',
+                title: 'Laporan Order',
+                messageTop: `<strong>BEEBERSIHJASA LAUNDRY</strong><br>
+                    Jl. Prabu Kian Santang No.80, Kota Tangerang`,
+                orientation: 'landscape',
+                pageSize: 'A4'
+            }
+        ]
+    });
+});
+
 </script>
 @endsection

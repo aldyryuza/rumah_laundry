@@ -14,14 +14,14 @@ class CreateOrderItemsTable extends Migration
     {
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned();
+            $table->integer('order_id')->nullable();
             $table->string('item_name');
             $table->integer('qty');
             $table->decimal('price', 12, 2);
             $table->decimal('subtotal', 12, 2);
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('orders');
+            // $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

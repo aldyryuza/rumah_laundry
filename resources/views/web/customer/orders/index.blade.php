@@ -50,8 +50,10 @@
                 <tr>
                     <th>No Order</th>
                     <th>Pelanggan</th>
+                    <th>Tanggal Order</th>
                     <th>Tipe</th>
                     <th>Paket</th>
+                    <th>Berat (KG/PCS)</th>
                     <th>Status</th>
                     <th>Total</th>
                     <th>Action</th>
@@ -62,8 +64,10 @@
                 <tr>
                     <td>{{ $item->no_order }}</td>
                     <td>{{ $item->nama_user }}</td>
+                    <td>{{ $item->date_in }}</td>
                     <td>{{ $item->laundryType->name }}</td>
                     <td>{{ $item->laundryPackage->name }}</td>
+                    <td>{{ $item->weight }}</td>
                     <td>{{ ucfirst(str_replace('_', ' ', $item->status)) }}</td>
                     <td>Rp {{ number_format($item->subtotal, 0, ',', '.') }}</td>
                     <td>

@@ -49,12 +49,12 @@
                         <div class="col-8">
                             <p class="mb-0">
                                 <a href="{{ route('order-customer') }}" class="btn btn-warning text-center">Create Order
-                                    Customer</a>
+                                    Pelanggan</a>
                             </p>
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
                         </div>
                         <!-- /.col -->
                     </div>

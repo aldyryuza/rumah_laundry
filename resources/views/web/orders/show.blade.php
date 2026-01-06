@@ -142,7 +142,7 @@
     {{ csrf_field() }}
 
     <select name="status" class="form-control" required>
-        <option value="dalam_antrian" {{ $data->status == 'dalam_antrian' ? 'selected' : '' }}>
+        <option value="antrian" {{ $data->status == 'dalam_antrian' ? 'selected' : '' }}>
             Dalam Antrian
         </option>
         <option value="dikerjakan" {{ $data->status == 'dikerjakan' ? 'selected' : '' }}>

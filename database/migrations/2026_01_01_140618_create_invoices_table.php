@@ -14,7 +14,7 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned();
+            $table->integer('order_id')->nullable();
             $table->string('invoice_number')->unique();
             $table->date('invoice_date');
             $table->decimal('total_amount', 12, 2);
@@ -22,7 +22,7 @@ class CreateInvoicesTable extends Migration
             $table->decimal('remaining_amount', 12, 2)->default(0);
             $table->timestamps();
 
-            $table->foreign('order_id')->references('id')->on('orders');
+            // $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 

@@ -31,7 +31,7 @@
                 <input type="text" name="alamat" class="form-control" required>
             </div>
             <div class="form-group">
-                <label>Tanggal Masuk</label>
+                <label>Tanggal Order</label>
                 <input type="date" name="date_in" class="form-control" required value="{{ date('Y-m-d') }}" readonly>
             </div>
 

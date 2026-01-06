@@ -16,9 +16,9 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('no_order')->unique();
 
-            $table->integer('user_id')->unsigned();
-            $table->integer('laundry_type_id')->unsigned();
-            $table->integer('laundry_package_id')->unsigned();
+            $table->integer('user_id')->nullable();
+            $table->integer('laundry_type_id')->nullable();
+            $table->integer('laundry_package_id')->nullable();
 
             $table->decimal('weight', 8, 2)->nullable();
             $table->integer('qty')->nullable();
@@ -39,10 +39,10 @@ class CreateOrdersTable extends Migration
 
             $table->timestamps();
 
-            // Foreign Key
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('laundry_type_id')->references('id')->on('laundry_types');
-            $table->foreign('laundry_package_id')->references('id')->on('laundry_packages');
+            // // Foreign Key
+            // $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('laundry_type_id')->references('id')->on('laundry_types');
+            // $table->foreign('laundry_package_id')->references('id')->on('laundry_packages');
         });
     }
 

@@ -80,7 +80,9 @@ class OrderCustomerController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('web.customer.orders.index')
+            // return redirect()->route('web.customer.orders.index')
+            //     ->with('success', 'Order berhasil dibuat');
+            return redirect()->route('login')
                 ->with('success', 'Order berhasil dibuat');
         } catch (\Exception $e) {
             DB::rollback();
@@ -103,6 +105,7 @@ class OrderCustomerController extends Controller
 
     public function show($id)
     {
+        dd($id);
         $data = Order::with([
             'user',
             'laundryType',

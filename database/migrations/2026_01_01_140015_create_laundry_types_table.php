@@ -14,7 +14,7 @@ class CreateLaundryTypesTable extends Migration
     {
         Schema::create('laundry_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code', 10)->unique(); 
+            $table->string('code', 10)->unique();
             $table->string('name', 100);
             $table->boolean('is_weight_based')->default(true);
             $table->timestamps();

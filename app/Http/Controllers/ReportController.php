@@ -11,7 +11,7 @@ class ReportController extends Controller
 {
     public function orders(Request $request)
     {
-        $query = Order::with('user');
+        $query = Order::with(['user', 'laundryType', 'laundryPackage', 'payments', 'invoice']);
 
         // filter tanggal
         if ($request->start_date && $request->end_date) {
